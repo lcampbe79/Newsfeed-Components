@@ -85,6 +85,22 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Professional Software Development in 2019',
+    date: 'Jul 1st, 2019',
+    firstParagraph: `Hodor hodor HODOR! Hodor hodor - hodor, hodor. Hodor hodor... Hodor hodor hodor; hodor hodor. Hodor hodor hodor, hodor, hodor
+          hodor. Hodor, hodor. Hodor. Hodor, hodor - hodor... Hodor hodor hodor; hodor HODOR hodor, hodor hodor?! Hodor hodor, hodor.
+          Hodor hodor hodor hodor hodor! Hodor hodor - HODOR hodor, hodor hodor hodor hodor hodor; hodor hodor? `,
+
+    secondParagraph: `Hodor, hodor. Hodor. Hodor, hodor, hodor. Hodor hodor, hodor. Hodor hodor, hodor, hodor hodor. Hodor! Hodor hodor, hodor;
+          hodor hodor hodor? Hodor, hodor. Hodor. Hodor, hodor - HODOR hodor, hodor hodor hodor! Hodor, hodor. Hodor. Hodor, HODOR
+          hodor, hodor hodor, hodor, hodor hodor. Hodor hodor - hodor - hodor... Hodor hodor hodor hodor hodor hodor hodor?! Hodor
+          hodor - hodor hodor hodor. Hodor. Hodor hodor... Hodor hodor hodor hodor hodor? `,
+
+    thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
+          Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
+          Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
 
@@ -115,34 +131,53 @@ const data = [
 
 //creating the function
 
-function createArticle() {
+function createArticle(item) {
   //defining new elements
   const article = document.createElement('div');
   const articleTitle = document.createElement('h2');
-  article.appendChild(articleTitle)
   const articleDate = document.createElement('p');
-  article.appendChild(articleDate);
-  const firstParagraph = document.createElement('p');
-  article.appendChild(firstParagraph);
-  const secondParagraph = document.createElement('p');
-  article.appendChild(secondParagraph);
-  const thirdParagraph = document.createElement('p');
-  article.appendChild(thirdParagraph);
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
   const openButton = document.createElement('span')
+  //const closeButton = document.createElement('span')
+  
+
+  //appending
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
   article.appendChild(openButton)
-  const closeButton = document.createElement('span')
-  article.appendChild(closeButton);
+  //article.appendChild(closeButton);
 
   //setting class names
   article.classList.add('article');
+  articleTitle.classList.add('title');
   articleDate.classList.add('date');
   openButton.classList.add('expandButton');
+  //closeButton.classList.add('.close')
+  
+  //add text
+  openButton.textContent = 'Click to Expand';
+  //closeButton.textContent = 'Click to Close';
+  articleTitle.textContent = item.title;
+  articleDate.textContent = item.date;
+  p1.textContent = item.firstParagraph;
+  p2.textContent = item.secondParagraph;
+  p3.textContent = item.thirdParagraph;
 
+  //eventListener
+  openButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  });
+    
 
   return article;
 }
 
 const articles = document.querySelector('.articles');
-articles.appendChild(createArticle());
-
-
+data.forEach(item => {
+  articles.appendChild(createArticle(item));  
+});
