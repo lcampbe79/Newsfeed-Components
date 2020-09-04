@@ -101,7 +101,7 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
+  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
@@ -112,3 +112,61 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
 
 */
+
+
+
+
+//creating the function
+
+function createArticle(item) {
+  //defining new elements
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const openButton = document.createElement('span')
+  //const closeButton = document.createElement('span')
+  
+
+  //appending
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(openButton)
+  //article.appendChild(closeButton);
+
+  //setting class names
+  article.classList.add('article');
+  articleTitle.classList.add('title');
+  articleDate.classList.add('date');
+  openButton.classList.add('expandButton');
+  //closeButton.classList.add('.close')
+  
+  //add text
+  openButton.textContent = 'Click to Expand';
+  //closeButton.textContent = 'Click to Close';
+  articleTitle.textContent = item.title;
+  articleDate.textContent = item.date;
+  p1.textContent = item.firstParagraph;
+  p2.textContent = item.secondParagraph;
+  p3.textContent = item.thirdParagraph;
+
+  //eventListener
+  openButton.addEventListener('click', () => {
+    article.classList.toggle('article-open');
+  });
+    
+
+  return article;
+}
+
+const articles = document.querySelector('.articles');
+data.forEach(item => {
+  articles.appendChild(createArticle(item));  
+});
+
+
